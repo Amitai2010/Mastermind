@@ -1,7 +1,7 @@
 # A class for the computer
 class Computer
   def initialize
-    @colors = %w[Red Blue Green Yellow white Black]
+    @colors = %w[Red Blue Green Yellow White Pink]
   end
 
   attr_reader :color

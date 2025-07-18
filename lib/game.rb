@@ -11,26 +11,36 @@ class Game
     code = @computer_player.choose_code
     12.times do
       guess = @human_player.guess
-      message = ''
-      if code == guess
-        puts 'you guessed currectly!'
+      if guess == code
+        puts 'you won!'
         return true
-      else
-        guess.each_with_index do |color, index|
-          if color == code[index]
-            message += ' correct'
-          else
-            if code.any? { |code_color| code_color == color}
-              message += ' different_place'
-            else
-              message += ' wrong_color'
-            end
-          end
-        end
-        puts message
       end
+      puts feedback(code, guess).join(' ')
+
     end
     puts 'you lost! game over!'
     false
+  end
+
+  private
+
+  def feedback(code, guess)
+    code_copy = code.dup
+    feedback = []
+
+    guess.each_with_index do |color, index|
+      if color == code_copy[index]
+        feedback.push('correct')
+        code_copy[index] = nil
+        next
+      end
+      if code_copy.include?(color)
+        feedback.push('different_place')
+        code_copy[code_copy.index(color)] = nil
+      else
+        feedback.push('incorrect')
+      end
+    end
+    feedback
   end
 end

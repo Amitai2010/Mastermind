@@ -6,15 +6,15 @@ class Player
   "B" => "Blue",
   "Y" => "Yellow",
   "W" => "White",
-  "K" => "Black"
+  "P" => "Pink"
     }
   end
 
   def guess
-    puts 'Input your guess (e.g. R G B Y): '
+    puts 'Input your guess (format: X X X X; allowed colors: R G B Y W P): '
     input = gets.chomp.upcase.split
     until input.all? { |c| @colors.key?(c) }
-      puts 'Invalid input, try again (use only these letters: R G B Y W K)'
+      puts 'Invalid input, try again (use only these letters: R G B Y W P)'
       input = gets.chomp.upcase.split
     end
     input.map { |c| @colors[c] }
